@@ -3,6 +3,8 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { FaqModule } from './faq/faq.module';
 import { Faq } from './faq/entities/faq.entity';
 import { ConfigModule } from '@nestjs/config';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -19,7 +21,7 @@ import { ConfigModule } from '@nestjs/config';
       entities: [Faq],
     } as TypeOrmModuleOptions),
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
