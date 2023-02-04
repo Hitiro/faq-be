@@ -71,3 +71,12 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Variáveis de ambiente
+
+TYPEORM_BD
+TYPEORM_USERNAME
+TYPEORM_HOST
+TYPEORM_PASSWORD
+TYPEORM_PORT
+TYPEORM_DATABASE
