@@ -5,6 +5,7 @@ import { Faq } from './faq/entities/faq.entity';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TagModule } from './tag/tag.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AppService } from './app.service';
       synchronize: true,
       entities: [Faq],
     } as TypeOrmModuleOptions),
+    TagModule,
   ],
   controllers: [AppController],
   providers: [AppService],
