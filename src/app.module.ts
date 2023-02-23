@@ -1,3 +1,4 @@
+import { Tag } from './tag/entities/tag.entity';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { FaqModule } from './faq/faq.module';
@@ -19,7 +20,7 @@ import { TagModule } from './tag/tag.module';
       username: process.env.TYPEORM_USERNAME,
       password: process.env.TYPEORM_PASSWORD,
       synchronize: true,
-      entities: [Faq],
+      entities: [Faq, Tag],
     } as TypeOrmModuleOptions),
     TagModule,
   ],
