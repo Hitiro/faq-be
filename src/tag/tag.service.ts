@@ -1,26 +1,46 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
+import { Tag } from './entities/tag.entity';
 
 @Injectable()
 export class TagService {
-  create(createTagDto: CreateTagDto) {
-    return 'This action adds a new tag';
+  constructor(
+    @InjectRepository(Tag)
+    private readonly tagRepository: Repository<Tag>,
+  ) {}
+
+  create(createTagDto: CreateTagDto): Promise<Tag> {
+    const tag = this.tagRepository.create(createTagDto);
+    return this.tagRepository.save(tag);
   }
 
-  findAll() {
-    return `This action returns all tag`;
+  findAll(): Promise<Tag[]> {
+    return this.tagRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tag`;
+  findOne(id: string): Promise<Tag> {
+    return this.tagRepository.findOneBy({ id });
   }
 
-  update(id: number, updateTagDto: UpdateTagDto) {
-    return `This action updates a #${id} tag`;
+  update(id: string, updateTagDto: UpdateTagDto) {
+    return this.tagRepository
+      .createQueryBuilder()
+      .update()
+      .set({
+        titulo: updateTagDto.titulo,
+      })
+      .where('id = :id', { id })
+      .execute();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} tag`;
+  remove(id: string) {
+    return this.tagRepository
+      .createQueryBuilder()
+      .delete()
+      .where('id = :id', { id })
+      .execute();
   }
 }
