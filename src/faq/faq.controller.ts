@@ -10,9 +10,15 @@ import {
 import { FaqService } from './faq.service';
 import { CreateFaqDto } from './dto/create-faq.dto';
 import { UpdateFaqDto } from './dto/update-faq.dto';
-import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger/dist';
+import {
+  ApiBody,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger/dist';
 
 @Controller('faq')
+@ApiTags('FAQs')
 export class FaqController {
   constructor(private readonly faqService: FaqService) {}
 

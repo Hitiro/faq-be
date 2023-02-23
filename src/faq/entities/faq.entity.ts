@@ -1,7 +1,10 @@
+import { Tag } from 'src/tag/entities/tag.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -16,6 +19,20 @@ export class Faq {
 
   @Column({ type: 'varchar', nullable: true })
   descricao: string;
+
+  @ManyToMany(() => Tag)
+  @JoinTable({
+    name: 'tb_faq_tags',
+    joinColumn: {
+      name: 'faq_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'tag_id',
+      referencedColumnName: 'id',
+    },
+  })
+  tags: Tag[];
 
   @CreateDateColumn()
   created_at: Date;

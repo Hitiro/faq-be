@@ -19,7 +19,7 @@ import { TagModule } from './tag/tag.module';
       port: process.env.TYPEORM_PORT,
       username: process.env.TYPEORM_USERNAME,
       password: process.env.TYPEORM_PASSWORD,
-      synchronize: true,
+      synchronize: false,
       entities: [Faq, Tag],
     } as TypeOrmModuleOptions),
     TagModule,
