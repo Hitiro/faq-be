@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Tag } from 'src/tag/entities/tag.entity';
 import { Repository } from 'typeorm';
 import { CreateFaqDto } from './dto/create-faq.dto';
 import { UpdateFaqDto } from './dto/update-faq.dto';
@@ -10,6 +11,9 @@ export class FaqService {
   constructor(
     @InjectRepository(Faq)
     private readonly faqRepository: Repository<Faq>,
+
+    @InjectRepository(Tag)
+    private readonly tagRepository: Repository<Tag>,
   ) {}
 
   create(createFaqDto: CreateFaqDto): Promise<Faq> {
@@ -18,11 +22,16 @@ export class FaqService {
   }
 
   findAll(): Promise<Faq[]> {
-    return this.faqRepository.find();
+    return this.faqRepository.find({
+      relations: ['tags'],
+    });
   }
 
   findOne(id: string): Promise<Faq> {
-    return this.faqRepository.findOneBy({ id });
+    return this.faqRepository.findOne({
+      where: { id: id },
+      relations: ['tags'],
+    });
   }
 
   update(id: string, updateFaqDto: UpdateFaqDto) {
