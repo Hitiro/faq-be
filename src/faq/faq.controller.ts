@@ -48,7 +48,7 @@ export class FaqController {
 
   @Patch(':id')
   @ApiOperation({ summary: 'Atualiza uma FAQ' })
-  @ApiResponse({ status: 200, description: 'Atualizado com sucesso!' })
+  @ApiResponse({ status: 201, description: 'Atualizado com sucesso!' })
   update(@Param('id') id: string, @Body() updateFaqDto: UpdateFaqDto) {
     return this.faqService.update(id, updateFaqDto);
   }
